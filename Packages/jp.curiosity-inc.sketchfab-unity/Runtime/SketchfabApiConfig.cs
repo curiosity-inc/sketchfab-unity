@@ -8,4 +8,5 @@ using UnityEngine;
 public class SketchfabApiConfig : ScriptableObject
 {
     public string ClientId;
+    public string CallbackUrl;
 }

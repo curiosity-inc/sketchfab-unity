@@ -20,6 +20,7 @@ namespace Curiosity.Sketchfab
         private SketchfabApiConfig _config;
         private string _accessToken;
         public const string PREF_SKETCHFAB_ACCESS_TOKEN = "sketchfab_token";
+        public UnityEvent OnLogin = new UnityEvent();
 
         public class ModelSearchOption
         {
@@ -63,6 +64,7 @@ namespace Curiosity.Sketchfab
                 Debug.LogWarning("ClientId is empty. Please set.");
             }
             _accessToken = PlayerPrefs.GetString(PREF_SKETCHFAB_ACCESS_TOKEN, "");
+            Application.deepLinkActivated += OnDeepLinkActivated;
         }
 
         public void SetAccessToken(string accessToken)
@@ -282,6 +284,21 @@ namespace Curiosity.Sketchfab
             public string uri;
             public string name;
             public string viewerUrl;
+        }
+
+        public void OnDeepLinkActivated(string urlString)
+        {
+            // Debug.Log($"onDeepLinkActivated:{urlString}");
+            if (urlString.StartsWith(_config.CallbackUrl))
+            {
+                var url = new Uri(urlString);
+                var pathStr = url.Fragment;
+                var fragment = pathStr.Substring(pathStr.IndexOf('#') + 1);
+                var parameters = HttpUtils.ParseQueryString(fragment);
+                var accessToken = parameters.Get("access_token");
+                SketchfabApi.Instance.SetAccessToken(accessToken);
+                OnLogin?.Invoke();
+            }
         }
     }
 }
