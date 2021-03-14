@@ -1,0 +1,15 @@
+{
+    "author": "curiosity, inc.",
+    "dependencies": {
+    },
+    "description": "Unity asset to access Sketchfab API easily",
+    "displayName": "Sketchfab Unity",
+    "keywords": [ "unity", "sketchfab" ],
+    "license": "SEE LICENSE IN LICENSE",
+    "name": "jp.curiosity-inc.sketchfab-unity",
+    "repository": "github:curiosity-inc/sketchfab-runtime-unity",
+    "unity": "2019.4",
+    "unityRelease": "0f1",
+    "version": "0.0.1"
+}
+
