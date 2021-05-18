@@ -78,6 +78,16 @@ namespace Curiosity.Sketchfab
             Application.OpenURL(string.Format(LOGIN_URL, _config.ClientId));
         }
 
+        /// <summary>
+        /// アプリケーション上のログアウトであり、Sketchfab をログアウトするわけではありません。
+        /// Sketchfab のログアウトはブラウザ上で操作してください。
+        /// </summary>
+        public void Logout()
+        {
+            _accessToken = "";
+            PlayerPrefs.SetString(PREF_SKETCHFAB_ACCESS_TOKEN, _accessToken);
+        }
+        
         public void SearchModels(ModelSearchOption option, UnityAction<ModelsApiResult> onSuccess, UnityAction onError, UnityAction<float> onProgress)
         {
             StartCoroutine(SearchModelsCoroutine(option, onSuccess, onError, onProgress));
