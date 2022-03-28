@@ -299,7 +299,7 @@ namespace Curiosity.Sketchfab
         public void OnDeepLinkActivated(string urlString)
         {
             // Debug.Log($"onDeepLinkActivated:{urlString}");
-            if (urlString.StartsWith(_config.CallbackUrl))
+            if (urlString.StartsWith(_config.CallbackUrl) || urlString.StartsWith(_config.CustomSchemeCallbackUrl))
             {
                 var url = new Uri(urlString);
                 var pathStr = url.Fragment;
