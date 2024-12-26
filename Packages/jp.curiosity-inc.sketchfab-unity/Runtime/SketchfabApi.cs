@@ -79,6 +79,15 @@ namespace Curiosity.Sketchfab
         }
 
         /// <summary>
+        /// Unity2022.3.46以前、かつXcode16以上、かつi0S18以上だと、Application.OpenURLが古いAPIを呼び出してしまうので、
+        /// 外から違うopenURLを利用するためのLoginメソッド
+        /// </summary>
+        public void Login(Action<string> openURL)
+        {
+            openURL(string.Format(LOGIN_URL, _config.ClientId));
+        }
+        
+        /// <summary>
         /// アプリケーション上のログアウトであり、Sketchfab をログアウトするわけではありません。
         /// Sketchfab のログアウトはブラウザ上で操作してください。
         /// </summary>
